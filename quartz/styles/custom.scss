@@ -1,3 +1,96 @@
 @use "./variables.scss" as *;
 
 // put your custom CSS here!
+/* ============================================================
+   WIKIPEDIA FLOAT INFOBOX (With Full Text Wrapping)
+   Works in both Obsidian (cssclasses: [wiki]) and Quartz
+   ============================================================ */
+
+/* 1. Optional: Widen the Obsidian reading pane */
+.wiki .markdown-preview-sizer,
+.wiki .cm-sizer {
+  max-width: 1000px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 2rem !important;
+}
+
+/* 2. FLOAT THE INFOBOX TO THE TOP-RIGHT */
+.wiki .callout[data-callout="wiki-infobox"] {
+  float: right !important;
+  clear: right !important;
+  width: 300px !important;
+  max-width: 42% !important;
+  margin: 0.25rem 0 1.25rem 2rem !important; /* Space on left & bottom for wrapped text */
+  padding: 0.85rem !important;
+  border-radius: 4px !important;
+  font-size: 0.85rem !important;
+  line-height: 1.45 !important;
+  background: var(--background-secondary, var(--lightgray)) !important;
+  border: 1px solid var(--background-modifier-border, var(--gray)) !important;
+  box-shadow: none !important;
+}
+
+/* Infobox Header Banner */
+.wiki .callout[data-callout="wiki-infobox"] > .callout-title {
+  display: flex !important;
+  justify-content: center !important;
+  text-align: center !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  padding: 0.4rem 0.5rem !important;
+  margin-bottom: 0.75rem !important;
+  border-radius: 3px !important;
+  background: var(--background-modifier-border, rgba(128, 128, 128, 0.15)) !important;
+  color: var(--text-normal, var(--dark)) !important;
+}
+
+.wiki .callout[data-callout="wiki-infobox"] .callout-icon {
+  display: none !important;
+}
+
+.wiki .callout[data-callout="wiki-infobox"] > .callout-content {
+  padding: 0 !important;
+}
+
+/* Center image inside Infobox */
+.wiki .callout[data-callout="wiki-infobox"] img {
+  display: block !important;
+  margin: 0 auto 0.5rem auto !important;
+  max-width: 100% !important;
+  border-radius: 2px !important;
+}
+
+/* Clean key-value table inside Infobox */
+.wiki .callout[data-callout="wiki-infobox"] table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 0.5rem 0 0 0 !important;
+}
+
+.wiki .callout[data-callout="wiki-infobox"] thead {
+  display: none !important;
+}
+
+.wiki .callout[data-callout="wiki-infobox"] td {
+  border: none !important;
+  border-top: 1px solid var(--background-modifier-border, rgba(128, 128, 128, 0.2)) !important;
+  padding: 0.4rem 0.25rem !important;
+  vertical-align: top !important;
+}
+
+.wiki .callout[data-callout="wiki-infobox"] td:first-child {
+  font-weight: 600 !important;
+  width: 38% !important;
+  color: var(--text-muted, var(--darkgray)) !important;
+}
+
+/* 3. RESPONSIVE MOBILE FALLBACK: Unfloat on narrow screens */
+@media (max-width: 750px) {
+  .wiki .callout[data-callout="wiki-infobox"] {
+    float: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 1.5rem 0 !important;
+  }
+}
