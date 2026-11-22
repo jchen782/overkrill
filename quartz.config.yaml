@@ -7,7 +7,7 @@ configuration:
   analytics:
     provider: plausible
   locale: en-US
-  baseUrl: jchen782.github.io/krillion-tool
+  baseUrl: jchen782.github.io/overkrill
   ignorePatterns:
     - private
     - templates
