@@ -106,6 +106,12 @@
   color: var(--text-muted, var(--darkgray)) !important;
 }
 
+/* Adjust spacing between the purple left border and content on Quartz embeds */
+blockquote.transclude {
+  padding-left: 1.5rem !important; /* Increase or decrease this value (e.g., 1rem to 2rem) */
+  margin-left: 0 !important;
+}
+
 /* 4. RESPONSIVE MOBILE FALLBACK: Unfloat on narrow screens */
 @media (max-width: 750px) {
   .wiki .callout[data-callout="wiki-infobox"],
