@@ -2,7 +2,7 @@
 
 // put your custom CSS here!
 /* ============================================================
-   WIKIPEDIA FLOAT INFOBOX (With Full Text Wrapping)
+   WIKIPEDIA FLOAT INFOBOX (Standalone + Transcluded Embeds)
    Works in both Obsidian (cssclasses: [wiki]) and Quartz
    ============================================================ */
 
@@ -15,13 +15,26 @@
   padding: 0 2rem !important;
 }
 
-/* 2. FLOAT THE INFOBOX TO THE TOP-RIGHT */
-.wiki .callout[data-callout="wiki-infobox"] {
+/* 2. Allow Quartz transcluded embeds to wrap around floated infoboxes cleanly */
+.transclude:has(.callout[data-callout="wiki-infobox"]) {
+  display: block !important;
+  overflow: visible !important;
+}
+
+.transclude:has(.callout[data-callout="wiki-infobox"])::after {
+  content: "" !important;
+  display: table !important;
+  clear: both !important;
+}
+
+/* 3. FLOAT THE INFOBOX TO THE TOP-RIGHT (Matches both .wiki pages and any transclude) */
+.wiki .callout[data-callout="wiki-infobox"],
+.transclude .callout[data-callout="wiki-infobox"] {
   float: right !important;
   clear: right !important;
   width: 300px !important;
   max-width: 42% !important;
-  margin: 0.25rem 0 1.25rem 2rem !important; /* Space on left & bottom for wrapped text */
+  margin: 0.25rem 0 1.25rem 2rem !important;
   padding: 0.85rem !important;
   border-radius: 4px !important;
   font-size: 0.85rem !important;
@@ -32,7 +45,8 @@
 }
 
 /* Infobox Header Banner */
-.wiki .callout[data-callout="wiki-infobox"] > .callout-title {
+.wiki .callout[data-callout="wiki-infobox"] > .callout-title,
+.transclude .callout[data-callout="wiki-infobox"] > .callout-title {
   display: flex !important;
   justify-content: center !important;
   text-align: center !important;
@@ -45,16 +59,19 @@
   color: var(--text-normal, var(--dark)) !important;
 }
 
-.wiki .callout[data-callout="wiki-infobox"] .callout-icon {
+.wiki .callout[data-callout="wiki-infobox"] .callout-icon,
+.transclude .callout[data-callout="wiki-infobox"] .callout-icon {
   display: none !important;
 }
 
-.wiki .callout[data-callout="wiki-infobox"] > .callout-content {
+.wiki .callout[data-callout="wiki-infobox"] > .callout-content,
+.transclude .callout[data-callout="wiki-infobox"] > .callout-content {
   padding: 0 !important;
 }
 
 /* Center image inside Infobox */
-.wiki .callout[data-callout="wiki-infobox"] img {
+.wiki .callout[data-callout="wiki-infobox"] img,
+.transclude .callout[data-callout="wiki-infobox"] img {
   display: block !important;
   margin: 0 auto 0.5rem auto !important;
   max-width: 100% !important;
@@ -62,32 +79,37 @@
 }
 
 /* Clean key-value table inside Infobox */
-.wiki .callout[data-callout="wiki-infobox"] table {
+.wiki .callout[data-callout="wiki-infobox"] table,
+.transclude .callout[data-callout="wiki-infobox"] table {
   width: 100% !important;
   border-collapse: collapse !important;
   margin: 0.5rem 0 0 0 !important;
 }
 
-.wiki .callout[data-callout="wiki-infobox"] thead {
+.wiki .callout[data-callout="wiki-infobox"] thead,
+.transclude .callout[data-callout="wiki-infobox"] thead {
   display: none !important;
 }
 
-.wiki .callout[data-callout="wiki-infobox"] td {
+.wiki .callout[data-callout="wiki-infobox"] td,
+.transclude .callout[data-callout="wiki-infobox"] td {
   border: none !important;
   border-top: 1px solid var(--background-modifier-border, rgba(128, 128, 128, 0.2)) !important;
   padding: 0.4rem 0.25rem !important;
   vertical-align: top !important;
 }
 
-.wiki .callout[data-callout="wiki-infobox"] td:first-child {
+.wiki .callout[data-callout="wiki-infobox"] td:first-child,
+.transclude .callout[data-callout="wiki-infobox"] td:first-child {
   font-weight: 600 !important;
   width: 38% !important;
   color: var(--text-muted, var(--darkgray)) !important;
 }
 
-/* 3. RESPONSIVE MOBILE FALLBACK: Unfloat on narrow screens */
+/* 4. RESPONSIVE MOBILE FALLBACK: Unfloat on narrow screens */
 @media (max-width: 750px) {
-  .wiki .callout[data-callout="wiki-infobox"] {
+  .wiki .callout[data-callout="wiki-infobox"],
+  .transclude .callout[data-callout="wiki-infobox"] {
     float: none !important;
     width: 100% !important;
     max-width: 100% !important;
