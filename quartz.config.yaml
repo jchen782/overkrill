@@ -109,7 +109,7 @@ plugins:
   - source: "@quartz-themes/core"
     enabled: true
     options:
-      theme: "things"
+      theme: "things-3"
       mode: both
   - source: "@quartz-community/explicit-publish"
     enabled: false
